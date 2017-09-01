@@ -1,39 +1,48 @@
-import java.util.*;
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Iterator;
 /**
  * Class representing a todo list.
  * TodoList object should aggregate TodoItem objects.
  */
 public class TodoList{
 
-  private ArrayList <TodoItem> todoList = new ArrayList <>();
+  private Scanner input = new Scanner(System.in);
+  private ArrayList <TodoItem> todoList;
 
   public TodoList(){
-    this.todoList = todoList;
+    todoList = new ArrayList<TodoItem>();
   }
+
+  public ArrayList<TodoItem> getTodoList(){
+    return todoList;
+  }
+
 
   public void listItems(){
     Integer counter = 1;
     String status;
-    for(TodoItem item : this.todoList){
-      if (item.getIsDone().equals("Undone")){
-        status = "[ ]";
-      }
-      else{
-        status = "[X]";
-      }
-      System.out.println(counter + ". " + " " + status +" " + item.getName());
-      counter +=1;
+
+    for(TodoItem item : todoList){
+      status = (item.getIsDone()) ? " [X]" : " [ ]";
+
+      System.out.println(counter + ") " + status + " " + item.getName());
+      counter++;
     }
   }
 
   public void addItem(TodoItem item){
-    this.todoList.add(item);
+    todoList.add(item);
   }
 
-  // public void markItem(Integer input){
-  //   for(int i = 0; i < this.todoList.size(); i++){
-  //     todoList.get(i+1).mark();
-  //   }
-  // }
+  public void archiveDone(){
+    Iterator<TodoItem> iter = todoList.iterator();
+    while (iter.hasNext()) {
+      TodoItem item = iter.next();
+      if(item.getIsDone()){
+        todoList.remove(item);
+      }
+    }
+  }
 
 }

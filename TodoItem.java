@@ -6,24 +6,30 @@ import java.util.*;
 public class TodoItem{
 
   private String name;
-  private String isDone;
+  private boolean isDone = false;
 
   public TodoItem(String name){
     this.name = name;
-    this.isDone = "Undone";
-  }
-
-  public void mark(){
-    this.isDone = "Done";
   }
 
 
   public String getName(){
-    return this.name;
+    return name;
   }
 
-  public String getIsDone(){
-    return this.isDone;
+  public boolean getIsDone(){
+    return isDone;
   }
+
+
+  public void mark(){
+    isDone = true;
+  }
+
+  public void unmark(){
+    isDone = false;
+  }
+
+
 
 }
